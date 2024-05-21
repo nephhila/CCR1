@@ -1,0 +1,81 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+################## FUNÇÃO PARA CALCULAR A CONCENTRAÇÃO DO REAGENTE ##################
+
+#  Calcula a concentração de reagente (A) em um determinado tempo (t) para uma reação de primeira ordem aA -> bB.
+
+#  Parâmetros:
+#    c0: Concentração inicial de reagente (A) (mol/L)
+#    k: Constante de velocidade da reação (L mol^-1 s^-1)
+#    t: Tempo (s)
+
+#  Retorno:
+#    Concentração de reagente (A) em um determinado tempo (t) (mol/L)
+
+def concentracao_reagente(c0, k, t):
+  return c0 * np.exp(-k * t)
+
+################## FUNÇÃO PARA CALCULAR A CONCENTRAÇÃO DOS PRODUTOS ##################
+
+#  Calcula a concentração de produto (B) em um determinado tempo (t) para uma reação de primeira ordem aA -> bB.
+
+#  Parâmetros:
+#    c0: Concentração inicial de reagente (A) (mol/L)
+#    k: Constante de velocidade da reação (L mol^-1 s^-1)
+#    t: Tempo (s)
+
+#  Retorno:
+#    Concentração de produto (B) em um determinado tempo (t) (mol/L)
+
+def concentracao_produto(c0, k, t):
+  return c0 - concentracao_reagente(c0, k, t)
+
+################## CONDIÇÕES INICIAIS DO USUÁRIO ##################
+
+c0 = float(input("Digite a concentração inicial de reagente (A) [mol/L]: "))
+k = float(input("Digite a constante de velocidade da reação (k) [L mol^-1 s^-1]: "))
+tempo_final = float(input("Digite o tempo final da simulação (t) [s]: "))
+
+################## VERIFICAÇÃO DA CONVERSÃO ##################
+
+while True:
+    tempo_verificacao = input("Deseja verificar a conversão em um ponto específico do tempo? (digite 'sim' ou 'nao'): ").strip().lower()
+    if tempo_verificacao == 'sim':
+        t_especifico = float(input("Insira o tempo (s) para verificação: "))
+        concentracao_reagente_verificacao = concentracao_reagente(c0, k, t_especifico)
+        conversao_reagente = (1 - concentracao_reagente_verificacao / c0) * 100
+        print(f"A conversão do reagente no tempo de {t_especifico}s é: {conversao_reagente:.2f}%")
+    elif tempo_verificacao == 'nao':
+        break
+    else:
+        print("Entrada inválida. Por favor, insira 'sim' para sim ou 'nao' para não.")
+
+################## SIMULAÇÃO DAS CONDIÇÕES INICIAIS ##################
+
+t = np.linspace(0, tempo_final, 100)  # 100 pontos de dados
+cA = concentracao_reagente(c0, k, t)
+cB = concentracao_produto(c0, k, t)
+
+################## PLOTANDO O GRÁFICO DE CONCENTRAÇÃO DO REAGENTE E DO PRODUTO ##################
+
+plt.figure(figsize=(10, 6))
+plt.plot(t, cA, label='Concentração do reagente A', c='b')
+plt.plot(t, cB, label='Concentração do produto B', c='r')
+plt.xlabel('Tempo (s)')
+plt.ylabel('Concentração (mol/L)')
+plt.title('Simulação de Reação de Primeira Ordem aA -> bB')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+################## PLOTANDO O GRÁFICO DE CONVERSÃO DO REAGENTE ##################
+
+plt.figure(figsize=(10, 6))
+plt.plot(t, cA, label='Conversão do reagente A')
+plt.xlabel('Tempo (s)')
+plt.ylabel('Conversão')
+plt.title('Conversão do Reagente A')
+plt.legend()
+plt.grid(True)
+plt.show()
