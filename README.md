@@ -1,4 +1,4 @@
-REATOR BATELADA - CINÉTICA E CÁLCULO DE REATORES 🧪
+# REATOR BATELADA - CINÉTICA E CÁLCULO DE REATORES 🧪
 
 🔹CÓDIGO #1 - REAÇÃO ELEMENTAR DE PRIMEIRA ORDEM
 
@@ -10,14 +10,14 @@ Este código realiza a simulação de uma reação de primeira ordem do tipo aA�
 
 O método numérico empregado para calcular a concentração do reagente A ao longo do tempo é a solução analítica da equação diferencial de uma reação de primeira ordem, que assume forma d[A]/dt = -k[A]. A solução desta ED é:
 
-A = [A]_0 * exp(-kt)
+* A = [A]_0 * exp(-kt)
 
 Onde:
 
-A é a concentração do reagente A no tempo t,
-[A]_0 é a concentração inicial do reagente,
-k é a constante de velocidade da reação,
-t é o tempo.
+* A é a concentração do reagente A no tempo t,
+* [A]_0 é a concentração inicial do reagente,
+* k é a constante de velocidade da reação,
+* t é o tempo.
 
 O método analítico é muito útil para reações de primeira ordem e não requer a utilização de métodos mais complexos.
 
